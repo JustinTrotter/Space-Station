@@ -54,10 +54,12 @@ public class Selector : MonoBehaviour {
 		Ray ray = new Ray (camera.transform.position, camera.transform.forward);
 
 		if (Physics.Raycast (ray, out hit)) {
-			GetComponent<MeshRenderer> ().enabled = true;
-			transform.position = calcuatePosition (hit.point, getHitFace(hit));
-		} else {
-			GetComponent<MeshRenderer> ().enabled = false;
+			if (hit.transform.tag == "Wall") {
+				GetComponent<MeshRenderer> ().enabled = true;
+				transform.position = calcuatePosition (hit.point, getHitFace (hit));
+			} else {
+				GetComponent<MeshRenderer> ().enabled = false;
+			}
 		}
 
 		if (GetComponent<MeshRenderer> ().enabled) {
@@ -65,7 +67,6 @@ public class Selector : MonoBehaviour {
 				pb = pb_ShapeGenerator.CubeGenerator (Vector3.one);
 				pb.gameObject.transform.position = new Vector3(transform.position.x + .5f, transform.position.y + .5f, transform.position.z + .5f - 1f);
 				pb.gameObject.AddComponent<MeshCollider> ();
-				pb.GetComponent<MeshCollider> ().convex = true;
 			}
 		}
 	}
