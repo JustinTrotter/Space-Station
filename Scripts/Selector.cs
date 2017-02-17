@@ -8,11 +8,10 @@ using ProBuilder2.MeshOperations;
 public class Selector : MonoBehaviour {
 
 	public Camera camera;
-
 	pb_Object pb;
 
 	void Start () {
-		
+
 	}
 
 	private enum Face {None, Up, Down, Left, Right, Front, Back}
@@ -64,7 +63,9 @@ public class Selector : MonoBehaviour {
 		if (GetComponent<MeshRenderer> ().enabled) {
 			if (Input.GetMouseButtonDown (0)) {
 				pb = pb_ShapeGenerator.CubeGenerator (Vector3.one);
-				pb.gameObject.transform.position = transform.position;
+				pb.gameObject.transform.position = new Vector3(transform.position.x + .5f, transform.position.y + .5f, transform.position.z + .5f - 1f);
+				pb.gameObject.AddComponent<MeshCollider> ();
+				pb.GetComponent<MeshCollider> ().convex = true;
 			}
 		}
 	}
