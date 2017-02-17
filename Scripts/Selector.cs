@@ -10,6 +10,9 @@ public class Selector : MonoBehaviour {
 	public Camera camera;
 	pb_Object pb;
 
+	public GameObject wall;
+	public GameObject floor;
+
 	void Start () {
 
 	}
@@ -64,9 +67,13 @@ public class Selector : MonoBehaviour {
 
 		if (GetComponent<MeshRenderer> ().enabled) {
 			if (Input.GetMouseButtonDown (0)) {
-				pb = pb_ShapeGenerator.CubeGenerator (Vector3.one);
-				pb.gameObject.transform.position = new Vector3(transform.position.x + .5f, transform.position.y + .5f, transform.position.z + .5f - 1f);
-				pb.gameObject.AddComponent<MeshCollider> ();
+
+				GameObject wallClone = (GameObject) Instantiate (wall, transform.position, transform.rotation);
+
+				//pb = pb_ShapeGenerator.CubeGenerator (new Vector3(2,3,1));
+				//pb.gameObject.transform.position = new Vector3(transform.position.x + .5f, transform.position.y + .5f, transform.position.z + .5f - 1f);
+				//pb.gameObject.AddComponent<MeshCollider> ();
+				//pb.gameObject.tag = "Wall";
 			}
 		}
 	}
